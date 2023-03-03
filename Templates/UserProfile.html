@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="bg-dark">
+    <div class="main position-absolute bg-dark h-100 w-100">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Blog App</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/dashboard">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/users">Follow others</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/feed">Feed</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+        <div class="details rounded position-relative d-flex flex-row justify-content-center p-5 m-2   ">
+            <div class="card d-flex flex-column p-5">
+                <h1 class="welcom">{{username}}'s Profile!</h1>
+                <h2 class="followers py-5">followers : {{followers}}</h2>
+                <h2 class="posts">posts : {{postno}}</h2>
+
+            </div>
+
+          
+
+            
+
+
+            
+
+            
+        </div>
+
+        <div class="post d-flex rounded position-relative justify-content-center p-3 m-2 bg-dark h-75 w-100">
+            
+
+            <div class="content rounded d-flex position-relative flex-column align-items-center p-2 bg-light h-100 w-75" style="overflow-y: scroll;">
+
+           
+  
+                <h1 class="heading p-3">Posts</h1>
+
+                {% for post in posts %}
+                <div class="elem d-flex rounded flex-column text-white h-75 w-75 bg-dark text-wrap p-3 m-2">
+                    <h2 name="{{post.Id}}" class="title">{{post.title}}</h2>
+                    <p name="{{post.Id}}" class="content text-wrap word-break">{{post.desc}}</p>
+                    <img name="{{post.Id}}" id="{{post.img_url}}" src="{{post.img_url}}" alt="Image" class="image w-50 h-50">
+                    
+                    
+                </div>
+
+                {% endfor %}
+
+            </div>
+            
+
+        </div>
+
+        
+
+        
+    </div>
+    
+</body>
+</html>

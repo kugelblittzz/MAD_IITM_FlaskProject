@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+     function fun(id){
+      console.log(id);
+
+ 
+      var k=document.getElementsByName(id);
+      console.log(k)
+      title=k[0].innerHTML
+      desc=k[1].innerHTML
+      url=k[2].id
+      console.log(url)
+      
+      console.log(title)
+      document.getElementById('editdiv').style.visibility="visible";
+      document.getElementById('Idedit').value=id;
+      document.getElementById('titleedit').value=title;
+      document.getElementById('descedit').value=desc;
+      document.getElementById('urledit').value=url;
+      
+
+      }
+    </script>
+    <title>Document</title>
+</head>
+<body class="bg-dark">
+    <div class="main position-absolute bg-dark h-100 w-100">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Blog App</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/dashboard">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/users">Follow others</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/feed">Feed</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+        <div class="details rounded position-relative d-flex flex-row justify-content-center p-5 m-2   ">
+            <div class="card d-flex flex-column p-5">
+                <h1 class="welcom">Hi {{username}}!</h1>
+                <h2 class="followers py-5">Your followers : {{followers}}</h2>
+                <h2 class="posts">Your posts : {{postno}}</h2>
+
+            </div>
+
+            <div class="card rounded d-flex w-50 flex-column mx-5 p-5">
+                <form action="/dashboard/post" method="post">
+                    <h3 class="makepost">Make a post</h3>
+                    <p class="followers">Title : </p> <input type="text" name="title" id="title" class="form-control" />
+                    <p class="followers">Description : </p> <input type="text" name="desc" id="desc" class="form-control" />
+                    <p class="followers">Url : </p> <input type="text" name="url" id="url" class="form-control" />
+                    <button type="submit" class="btn btn-block text-white mb-4 my-3" style="background-color: black;">Post</button>
+                </form>
+
+               
+    
+
+            </div>
+
+            
+
+
+            
+
+            
+        </div>
+
+        <div class="post d-flex rounded position-relative justify-content-center p-3 m-2 bg-dark h-75 w-100">
+            
+
+            <div class="content rounded d-flex position-relative flex-column align-items-center p-2 bg-light h-100 w-75" style="overflow-y: scroll;">
+
+              <div  id="editdiv" class="card position-absolute rounded d-flex w-50 flex-column mx-5 p-5" style="visibility: hidden;" >
+                <form action="/dashboard/edit" method="post" >
+                    <h3 id="editpost" class="editpost">Edit a post</h3>
+                    <p class="followers">Id: </p> <input type="text" name="Idedit" id="Idedit" class="form-control" />
+                    <p class="followers">Title : </p> <input type="text" name="titleedit" id="titleedit" class="form-control" />
+                    <p class="followers">Description : </p> <input type="text" name="descedit" id="descedit" class="form-control" />
+                    <p class="followers">Url : </p> <input type="text" name="urledit" id="urledit" class="form-control" />
+                    <button type="submit" class="btn btn-block text-white mb-4 my-3" style="background-color: black;">Post</button>
+                </form>
+  
+            </div>
+  
+                <h1 class="heading p-3">Your Posts</h1>
+
+                {% for post in posts %}
+                <div class="elem d-flex rounded flex-column text-white h-75 w-75 bg-dark text-wrap p-3 m-2">
+                    <h2 name="{{post.Id}}" class="title">{{post.title}}</h2>
+                    <p name="{{post.Id}}" class="content text-wrap word-break">{{post.desc}}</p>
+                    <img name="{{post.Id}}" id="{{post.img_url}}" src="{{post.img_url}}" alt="Image" class="image w-50 h-50">
+                    <a href="/dashboard/delete/{{post.Id}}" data-method="DELETE" class="delete">Delete</a>
+                    <div id="{{post.Id}}" onclick="fun(id)" class="btn">Edit Post</div>
+                    
+                </div>
+
+                {% endfor %}
+
+            </div>
+            
+
+        </div>
+
+        
+
+        
+    </div>
+    
+</body>
+</html>

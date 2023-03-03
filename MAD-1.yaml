@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: Blog Application
+  description: >-
+    This is a sample Blog Application Server based on the OpenAPI 3.0
+    specification.
+  version: 1.0.11
+externalDocs:
+  url: http://127.0.0.1:5000
+  description: Blog
+servers:
+  - url: http://127.0.0.1:5000
+    variables: {}
+    description: Blog Application
+paths:
+  /signup/register:
+    summary: Handles the registration of a new user
+    post:
+      summary: Handle the registration of user after recieving the user details
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                Returns Signup page if username already exists, else returns Signin Page:
+                  value: Signin or signup page
+  /signin/register:
+    summary: Handles the Logging in of a user
+    post:
+      summary: Verifies the Username and password to login the user to the application
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            text/html:
+              examples:
+                HTML Page:
+                  value: >-
+                    Redirect to Dashboard page of the user or Sign in Page with
+                    alert "Username or password incorrect"
+  /dashboard:
+    summary: >-
+      Serves the Dashboard page of the user if user is logged in and has a
+      session
+    get:
+      summary: >-
+        Serves the dashboard page with "username" , "number of followers",
+        "number of posts" and the "posts"
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            text/html:
+              examples:
+                HTML page:
+                  value: >-
+                    Returns Dashboard of the user if user is logged in with
+                    'username','followers','posts_num' and posts
+
+
+                    If user not logged in , serves the sign in page
+  /logout:
+    summary: Handles the logging out of a user
+    get:
+      summary: >-
+        Handles the logging out of the user and removes the user from session if
+        exists
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            text/html:
+              examples:
+                HTML page:
+                  value: Returns the index page of the application
+  /dashboard/post:
+    summary: Handles the posting of a blog post
+    post:
+      summary: >-
+        Fetches the details of the blog post and saves it to database and then
+        calls the Dashboard function to return dashboard of user
+      description: >-
+        Fetches the details of the blog post and saves it to database and then
+        calls the Dashboard function to return dashboard of user
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            text/html:
+              examples:
+                HTML page:
+                  value: |-
+                    returns signin page if user not logged in.
+
+                    If logged in,reroutes to /dashboard
+  /dashboard/delete/:
+    summary: Handles deletion of particular blog post
+    get:
+      summary: Deletes a post based on the id
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+  /users/search:
+    summary: Search for users
+    get:
+      summary: Search for users
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+  /users/search/follow:
+    summary: Handles follow request
+    post:
+      summary: Follows/Unfolllows a user
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+  /feed:
+    summary: To fetch feed of following users
+    get:
+      summary: Get posts of all users followed by the user
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+  /dashboard/edit:
+    summary: Edit a particular post
+    post:
+      summary: Process the edit of a particular post
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+  /users/profile/<user>:
+    summary: Fetches the posts and details of a particular user
+    get:
+      summary: Gets details and posts of a particular user profile
+      description: ''
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
